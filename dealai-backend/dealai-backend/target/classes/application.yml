@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/dealai?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    defer-datasource-initialization: true   # let Hibernate create tables before data.sql runs
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: always
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+app:
+  jwt:
+    secret: "CHANGE_THIS_TO_A_LONG_RANDOM_BASE64_SECRET_BEFORE_PRODUCTION_USE_1234567890"
+    expiration-ms: 86400000   # 24h
+  deal-engine:
+    min-meaningful-saving-percent: 5.0   # below this, price is treated as "roughly equal"
